@@ -81,9 +81,19 @@
     ..for (i, d) in data.enumerate() {(
       table.hline(y: i + 1, stroke: (thickness: 0.5pt)),
 
-      table.cell(align: center + horizon, text(size: 11pt, [#d.year])),
+      if d.year == "" {
+        table.cell(align: center + horizon, text(size: 11pt, [　]))
+      } else {
+        table.cell(align: center + horizon, text(size: 11pt, [#d.year]))
+      },
+
       table.cell(align: center + horizon, text(size: 11pt, [#d.month])),
-      table.cell(align: horizon, stack(dir: ltr, block(height: 13pt), text(size: 11pt, [　#d.desc]))),
+
+      if d.desc == "以上" {
+        table.cell(align: right + horizon, stack(dir: ltr, block(height: 13pt), text(size: 11pt, [#d.desc])))
+      } else {
+        table.cell(align: horizon, stack(dir: ltr, block(height: 13pt), text(size: 11pt, [　#d.desc])))
+      }
     )},
 
     table.hline(y: data.len() + 1, stroke: (thickness: 1.5pt)),
